@@ -1,0 +1,9 @@
+#users {
+	margin-top: 30px;
+	float:left;
+}
+
+#userNameNotAvailable, #userNameCreatedSuccessfully, #userNameUpdatedSuccessfully {
+	display:none;
+	margin-top: 30px;
+}

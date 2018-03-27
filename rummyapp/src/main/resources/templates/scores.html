@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Scores</title>
+<link rel="stylesheet" type="text/css"
+	href="../static/css/libraries/bootstrap.min.css"
+	th:href="@{css/libraries/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" href="../static/css/scores.css"
+	th:href="@{css/scores.css}" />
+</head>
+<body>
+	<!-- Fixed navbar -->
+	<nav class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Rummy</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="./users">Users</a></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</nav>
+
+	<div class="container">
+
+		<!-- Main component for a primary marketing message or call to action -->
+		<div class="jumbotron">
+			<div class="row">
+				<div class="col-sm-12" id="game_detail">
+					<h1>Game Id : <span></span></h1>
+					<h6>Started at: <span></span></h6>
+					<p>Max Score: <span></span></p>
+				</div>			
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-12">
+					<table class="table table-stripped" id="scores_table">
+						<thead>
+						</thead>
+						<tbody>							
+						</tbody>
+					</table>
+					<button class="btn btn-primary" type="button" onclick="scores.submitScores()">Submit Scores</button>
+				</div>			
+			</div>
+      </div>
+    </div>
+    <script type="text/javascript"
+		src="../static/js/libraries/jquery-3.2.1.min.js"
+		th:src="@{js/libraries/jquery-3.2.1.min.js}"></script>
+	<script type="text/javascript"
+		src="../static/js/libraries/bootstrap.min.js"
+		th:src="@{js/libraries/bootstrap.min.js}"></script>
+		<script type="text/javascript"
+		src="../static/js/ajax.js"
+		th:src="@{js/ajax.js}"></script>
+	<script type="text/javascript"
+		src="../static/js/scores.js"
+		th:src="@{js/scores.js}"></script>
+	</body>
+</html>

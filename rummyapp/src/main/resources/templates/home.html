@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home</title>
+<link rel="stylesheet" type="text/css"
+	href="../static/css/libraries/bootstrap.min.css"
+	th:href="@{css/libraries/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" href="../static/css/home.css"
+	th:href="@{css/home.css}" />
+</head>
+<body>
+	<!-- Fixed navbar -->
+	<nav class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Rummy</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="./users">Users</a></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</nav>
+
+	<div class="container">
+
+		<!-- Main component for a primary marketing message or call to action -->
+		<div class="jumbotron">
+			<h1>Indian Rummy</h1>
+			<p>Indian Rummy (or Paplu) is a card game in India with little
+				variation from original rummy. It may be considered a cross between
+				Rummy 500 and gin rummy. Indian Rummy is a variant of the rummy game
+				popular in India that involves making valid sets out of 13 cards.
+				Each player is dealt 13 cards initially; each has to draw and
+				discard cards by turns till one player melds his/her cards with
+				valid sets that meet the Rummy validation rules. It could be that
+				Indian Rummy evolved from a version of Rummy in South Asia, Celebes
+				Rummy, also called Rhuk.[citation needed] Two kinds of sets are
+				possible: a run of consecutive suited cards, and three or four of a
+				kind (with no duplicate suits.) The basic requirement for winning a
+				hand is at least two sequences, one of which must be "pure", i.e.,
+				made without any jokers.</p>
+			<p>
+				<!-- <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a> -->
+			<div class="btn-group">
+			<div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle"
+						data-toggle="dropdown">
+    <b id="set_high_score">Set High Score</b> <span class="caret"></span>
+					</button>
+    <ul class="dropdown-menu" role="menu" id="max_score">
+    </ul>
+  </div>
+				<button type="button" class="btn btn-primary" id="create_game" onclick="home.createGame()">Create a Game</button>
+  
+</div>
+        </p>
+			
+      </div>
+
+    </div>
+    <script type="text/javascript"
+		src="../static/js/libraries/jquery-3.2.1.min.js"
+		th:src="@{js/libraries/jquery-3.2.1.min.js}"></script>
+	<script type="text/javascript"
+		src="../static/js/libraries/bootstrap.min.js"
+		th:src="@{js/libraries/bootstrap.min.js}"></script>
+		<script type="text/javascript"
+		src="../static/js/ajax.js"
+		th:src="@{js/ajax.js}"></script>
+	<script type="text/javascript"
+		src="../static/js/home.js"
+		th:src="@{js/home.js}"></script>
+	</body>
+</html>
