@@ -15,6 +15,7 @@ public class App
 {
     public static void main( String[] args )
     {
+    	Long startTime = System.currentTimeMillis();
         ExecutorService service = Executors.newFixedThreadPool(10);        
         MyCallable callable = new MyCallable();        
         List<Future<Integer>> list = new ArrayList<>();        
@@ -29,5 +30,7 @@ public class App
             }
         }
         service.shutdown();
+        Long endTime = System.currentTimeMillis();
+        System.out.println("time diff " + (startTime - endTime));
     }
 }

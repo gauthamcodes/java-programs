@@ -65,7 +65,7 @@ public class DownloaderTask implements Runnable {
 						}
 						if (config.getLimit() != 0 && config.getTotal() == config.getLimit()) {
 							break;
-						}	
+						}
 						if (records.size() == config.getBufferSize()) {
 							records.wait();
 						}

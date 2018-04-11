@@ -1,38 +1,46 @@
 package com.gautham.cricketstream;
 
-import com.gautham.cricketstream.constant.Occurrence;
-import com.gautham.cricketstream.constant.Player;
-import com.gautham.cricketstream.model.Innings;
-import com.gautham.cricketstream.service.ProbabilityService;
-import com.gautham.cricketstream.service.impl.IProbabilityService;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.varia.NullAppender;
 
 /**
  * Hello world!
  *
  */
-public class App 
-{
-    public static void main( String[] args ) throws InterruptedException
-    {
-    	ProbabilityService service = null;
-    	
-    	Innings innings = new Innings();
-    	innings.setPlayer(Player.KOHLI);
-    	innings.setBallsFaced(0);
-    	innings.setRunScored(0);
-    	
-    	while(true) {
-    		service = new IProbabilityService();
-    		
-    		Double power = Math.random();
-    		Double difficulty = Math.random();
-    		innings.setPower(power);
-    		innings.setDifficulty(difficulty);
-    		for(Occurrence occ:Occurrence.values()) {
-    			service.doubles(innings);
-    		}
-    		innings.bowled();
-    	}
-    	
-    }
+public class App {
+	public static void main(String[] args) throws InterruptedException {
+		BasicConfigurator.configure(new NullAppender());
+
+		SimpleConsumer consumer = new SimpleConsumer();
+		Thread consumeTask = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				consumer.consume();
+			}
+		});
+		consumeTask.start();
+
+		SimpleProducer producer = new SimpleProducer();
+		Thread producerTask = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					producer.produce();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		producerTask.start();
+
+		SimpleStreamer streamer = new SimpleStreamer();
+		Thread streamTask = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				streamer.stream();
+			}
+		});
+		streamTask.start();
+
+	}
 }

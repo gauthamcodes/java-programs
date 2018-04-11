@@ -1,11 +1,14 @@
 package com.gautham.cricketstream.model;
 
-import com.gautham.cricketstream.constant.Player;
+import java.util.concurrent.ThreadLocalRandom;
+
+import com.gautham.cricketstream.constant.Batsman;
+import com.gautham.cricketstream.constant.Bowler;
+import com.gautham.cricketstream.constant.Occurrence;
+import com.gautham.cricketstream.constant.Wicket;
 
 public class Innings {
-	private Player player;
-	private Double power;
-	private Double difficulty;
+	private Batsman batsman;
 	private Integer ballsFaced;
 	private Integer runScored;
 	private Integer noOfSixes;
@@ -13,18 +16,31 @@ public class Innings {
 	private Integer noOfDoubles;
 	private Integer noOfSingles;
 	private Integer noOfMaidens;
-	private String wicketType;
+	private Wicket wicket;
+	private Boolean notOut;
 
-	public Player getPlayer() {
-		return player;
+	public Innings() {
+
 	}
 
-	public Double getPower() {
-		return power;
+	public Innings(Batsman batsman) {
+		this.batsman = batsman;
+		this.ballsFaced = 0;
+		this.runScored = 0;
+		this.noOfDoubles = 0;
+		this.noOfFours = 0;
+		this.noOfSixes = 0;
+		this.noOfSingles = 0;
+		this.noOfMaidens = 0;
+		this.notOut = true;
 	}
 
-	public Double getDifficulty() {
-		return difficulty;
+	public Batsman getBatsman() {
+		return batsman;
+	}
+
+	public void setBatsman(Batsman batsman) {
+		this.batsman = batsman;
 	}
 
 	public Integer getBallsFaced() {
@@ -55,20 +71,8 @@ public class Innings {
 		return noOfMaidens;
 	}
 
-	public String getWicketType() {
-		return wicketType;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
-
-	public void setPower(Double power) {
-		this.power = power;
-	}
-
-	public void setDifficulty(Double difficulty) {
-		this.difficulty = difficulty;
+	public Wicket getWicket() {
+		return wicket;
 	}
 
 	public void setBallsFaced(Integer ballsFaced) {
@@ -99,12 +103,57 @@ public class Innings {
 		this.noOfMaidens = noOfMaidens;
 	}
 
-	public void setWicketType(String wicketType) {
-		this.wicketType = wicketType;
+	public void setWicket(Wicket wicket) {
+		this.wicket = wicket;
 	}
-	
-	public void bowled() {
+
+	public Boolean getNotOut() {
+		return notOut;
+	}
+
+	public void setNotOut(Boolean notOut) {
+		this.notOut = notOut;
+	}
+
+	public Bowler bowl() {
 		this.ballsFaced++;
+		return Bowler.values()[ThreadLocalRandom.current().nextInt(0, Bowler.values().length)];
+	}
+
+	public void six() {
+		this.runScored += Occurrence.SIX.getValue();
+		this.noOfSixes++;
+	}
+
+	public void four() {
+		this.runScored += Occurrence.FOUR.getValue();
+		this.noOfFours++;
+	}
+
+	public void two() {
+		this.runScored += Occurrence.DOUBLE.getValue();
+		this.noOfDoubles++;
+	}
+
+	public void one() {
+		this.runScored += Occurrence.SINGLE.getValue();
+		this.noOfSingles++;
+	}
+
+	public void maiden() {
+		this.noOfMaidens++;
+	}
+
+	public void wicket() {
+		this.notOut = false;
+	}
+
+	@Override
+	public String toString() {
+		return "Innings [batsman=" + batsman + ", ballsFaced=" + ballsFaced + ", runScored=" + runScored
+				+ ", noOfSixes=" + noOfSixes + ", noOfFours=" + noOfFours + ", noOfDoubles=" + noOfDoubles
+				+ ", noOfSingles=" + noOfSingles + ", noOfMaidens=" + noOfMaidens + ", wicket=" + wicket + ", notOut="
+				+ notOut + "]";
 	}
 
 }

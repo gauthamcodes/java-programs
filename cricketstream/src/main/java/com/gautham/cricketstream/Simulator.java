@@ -1,46 +1,57 @@
 package com.gautham.cricketstream;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
-import com.gautham.cricketstream.constant.Player;
+import com.gautham.cricketstream.constant.Batsman;
+import com.gautham.cricketstream.constant.Occurrence;
+import com.gautham.cricketstream.constant.Wicket;
 import com.gautham.cricketstream.model.Innings;
 
 public class Simulator {
-	private Player player;
-	private static final Integer range = 100;
 
-	public Simulator(Player player) {
-		this.player = player;
+	private Innings innings;
+
+	public Simulator() {
+		this.innings = new Innings(Batsman.values()[ThreadLocalRandom.current().nextInt(0, Batsman.values().length)]);
 	}
 
-	public Innings start() {
-		if (player != null) {
-			System.out.println("Innings started for player " + player.getName());
-			Innings innings = new Innings();
-			Integer sixLimit = getSixLimit();
-
-			while (true) {
-				Integer random = new Random().nextInt(range);
-				// if(random > )
-
+	public Innings getInnings() {
+		Integer maxBalls = ThreadLocalRandom.current().nextInt(0, 150);
+		while (true) {
+			play();
+			if (!innings.getNotOut() || innings.getBallsFaced() == maxBalls) {
+				if (!innings.getNotOut()) {
+					innings.setWicket(Wicket.values()[ThreadLocalRandom.current().nextInt(0, Wicket.values().length)]);
+				}
 				break;
 			}
-			return innings;
-		} else {
-			System.out.println("No player found to start the innings");
-			return null;
 		}
+		return innings;
 	}
 
-	private Integer getSixLimit() {
-		return null;
-	}
-
-	public Player getPlayer() {
-		return player;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
+	private void play() {
+		Occurrence occurrence = Distribution.getOccurrence(innings.getBatsman(), innings.bowl());
+		switch (occurrence) {
+		case SIX:
+			innings.six();
+			break;
+		case FOUR:
+			innings.four();
+			break;
+		case DOUBLE:
+			innings.two();
+			break;
+		case SINGLE:
+			innings.one();
+			break;
+		case MAIDEN:
+			innings.maiden();
+			break;
+		case WICKET:
+			innings.wicket();
+			break;
+		default:
+			break;
+		}
 	}
 }

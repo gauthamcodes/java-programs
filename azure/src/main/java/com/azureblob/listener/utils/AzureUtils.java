@@ -1,9 +1,11 @@
 package com.azureblob.listener.utils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,6 +17,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+
+import org.apache.avro.generic.GenericRecord;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class AzureUtils {
 	public static Properties loadProperties() {
@@ -105,5 +112,29 @@ public class AzureUtils {
 			e.printStackTrace();
 		}
 		return isDone;
+	}
+
+	public static String createDirectory(String directory, String root) {
+		String[] folders = directory.split("/");
+		StringBuilder path = new StringBuilder(root);
+		for (String folder : folders) {
+			File file = new File(path.toString() + folder);
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			path.append(folder + "\\");
+		}
+		return path.toString();
+	}
+
+	public static void toJson(List<GenericRecord> records, String file) throws IOException {
+		
+		try (PrintWriter out = new PrintWriter(file, "UTF-8")) {
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			String json = gson.toJson(records);
+			out.write(json);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
